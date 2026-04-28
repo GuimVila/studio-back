@@ -39,7 +39,7 @@ class NewsletterSendController extends Controller
 
         foreach ($subscribers as $subscriber) {
             Mail::to($subscriber->email)
-                ->send(new NewsletterNewResource($subscriber, $validated));
+                ->queue(new NewsletterNewResource($subscriber, $validated));
         }
 
         $send = NewsletterSend::create([

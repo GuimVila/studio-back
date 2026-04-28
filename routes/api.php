@@ -13,10 +13,10 @@ use App\Http\Controllers\Api\NewsletterSendController;
 |--------------------------------------------------------------------------
 */
 
-Route::post('/contact', [ContactController::class, 'store']);
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe']);
+Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,1');
+Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:5,1');
+Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->middleware('throttle:5,1');
 Route::get('/newsletter/confirm/{token}', [NewsletterController::class, 'confirm']);
 Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe']);
 
@@ -39,5 +39,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/reading-progress', [ReadingProgressController::class, 'update']);
 
     // Newsletter
-    Route::post('/newsletter/send-new-resource', [NewsletterSendController::class, 'sendNewResource']);
+    Route::post('/newsletter/send-new-resource', [NewsletterSendController::class, 'sendNewResource'])->middleware('throttle:5,1');
 });

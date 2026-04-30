@@ -7,7 +7,7 @@
 
     <p>Fes clic al botó per confirmar:</p>
 
-    <a href="{{ config('app.url') }}/api/newsletter/confirm/{{ $subscriber->confirmation_token }}"
+    <a href="{{ rtrim(config('app.frontend_url'), '/') }}/subscribe/confirmed?token={{ urlencode($subscriber->confirmation_token) }}"
         style="display:inline-block;padding:10px 20px;background:black;color:white;text-decoration:none;">
         Confirmar subscripció
     </a>

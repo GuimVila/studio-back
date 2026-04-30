@@ -18,8 +18,15 @@ class NewsletterNewResource extends Mailable
 
     public function build()
     {
+        $unsubscribeUrl = rtrim(config('app.url'), '/')
+            . '/api/newsletter/unsubscribe/'
+            . urlencode($this->subscriber->unsubscribe_token);
+
         return $this
             ->subject('Nou recurs publicat: ' . $this->resource['title'])
-            ->view('newsletter-new-resource');
+            ->view('newsletter-new-resource')
+            ->with([
+                'unsubscribeUrl' => $unsubscribeUrl,
+            ]);
     }
 }

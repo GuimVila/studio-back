@@ -17,6 +17,7 @@ class ContactReceived extends Mailable
     {
         return $this
             ->subject('Nou contacte des de la web')
+            ->replyTo($this->data['email'], $this->data['name'])
             ->view('contact');
     }
 }

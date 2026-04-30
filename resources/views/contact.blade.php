@@ -14,6 +14,12 @@
 
         <p><strong>Nom:</strong> {{ $data['name'] }}</p>
         <p><strong>Email:</strong> {{ $data['email'] }}</p>
+        @if (!empty($data['phone']))
+            <p><strong>Telèfon:</strong> {{ $data['phone'] }}</p>
+        @endif
+        @if (!empty($data['service']))
+            <p><strong>Servei:</strong> {{ $data['service'] }}</p>
+        @endif
         <p><strong>Missatge:</strong></p>
 
         <div style="background:#f9f9f9; padding:10px; border-radius:5px;">

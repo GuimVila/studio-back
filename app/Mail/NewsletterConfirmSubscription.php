@@ -15,8 +15,15 @@ class NewsletterConfirmSubscription extends Mailable
 
     public function build()
     {
+        $confirmationUrl = rtrim(config('app.frontend_url'), '/')
+            . '/subscribe/confirmed?token='
+            . urlencode($this->subscriber->confirmation_token);
+
         return $this
             ->subject('Confirma la teva subscripció')
-            ->view('confirm');
+            ->view('confirm')
+            ->with([
+                'confirmationUrl' => $confirmationUrl,
+            ]);
     }
 }
